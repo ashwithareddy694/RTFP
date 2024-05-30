@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Doctors</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #doctorList {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Doctors</h1>
+        <div id="doctorList"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        axios.get('http://localhost:3000/doctors')
+            .then(response => {
+                const doctors = response.data;
+                const doctorList = document.getElementById('doctorList');
+
+                doctors.forEach(doctor => {
+                    const doctorName = document.createElement('p');
+                    doctorName.textContent = doctor.username; // Display the doctor's username
+                    doctorList.appendChild(doctorName);
+                });
+            })
+            .catch(error => {
+                console.error("There was an error fetching the doctors data!", error);
+            });
+
+
+    </script>
+</body>
+
+</html>

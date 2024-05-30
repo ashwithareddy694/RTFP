@@ -1,0 +1,116 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="stylesdocdash.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Doctor Dashboard</h2>
+        <div class="dashboard-section">
+            <h3>Booked Appointments</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Disease</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="appointmentTable">
+                  
+                </tbody>
+            </table>
+        </div>
+        <div class="dashboard-section">
+            <a href="manage_schedules.html">Manage Schedules</a>
+        </div>
+        <div class="logout-section">
+            <a href="logout.html">Logout</a>
+        </div>
+    </div>
+
+    <script>
+        // Sample data - Replace with actual data fetching logic
+        const appointments = [
+            { patientName: 'John Doe', disease: 'Flu', date: '2024-06-01', time: '10:00 AM' },
+            { patientName: 'Jane Smith', disease: 'Cold', date: '2024-06-02', time: '11:00 AM' },
+            // Add more appointments here
+        ];
+
+        const appointmentTable = document.getElementById('appointmentTable');
+
+        appointments.forEach(appointment => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${appointment.patientName}</td>
+                <td>${appointment.disease}</td>
+                <td>${appointment.date}</td>
+                <td>${appointment.time}</td>
+            `;
+            appointmentTable.appendChild(row);
+        });
+    </script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>View Appointments</title>
+    <link rel="stylesheet" type="text/css" href="stylesadminviewapp.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>View All Appointments</h2>
+        <div class="dashboard-section">
+            <table id="appointmentsTable">
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Patient Name</th>
+                    <th>Doctor Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>
+            </table>
+        </div>
+        <div class="logout-section">
+            <a href="index.html">Back to Home</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Fetch appointment data from the server
+        axios.get('http://localhost:3000/patientappointments')
+            .then(response => {
+                const appointments = response.data;
+
+                // Get the table element
+                const table = document.getElementById("appointmentsTable");
+                let dn = localStorage.getItem("doctorName");
+                const filteredAppointments = appointments.filter(appointment => appointment.DocterName === dn);
+                // Iterate over the appointments and populate the table
+                filteredAppointments.forEach(appointment => {
+                    const row = table.insertRow(-1);
+                    row.insertCell(0).textContent = appointment.id; // Assuming appointment ID is present in the data
+                    row.insertCell(1).textContent = appointment.patientName; // Assuming patient name is present in the data
+                    row.insertCell(2).textContent = appointment.DocterName; // Assuming doctor name is present in the data
+                    row.insertCell(3).textContent = appointment.date; // Assuming date is present in the data
+                    row.insertCell(4).textContent = appointment.time; // Assuming time is present in the data
+                });
+            })
+            .catch(error => {
+                console.error("Error fetching appointment data:", error);
+            });
+    </script>
+</body>
+
+</html>

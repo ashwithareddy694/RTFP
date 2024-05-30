@@ -1,0 +1,178 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Book Appointment</h2>
+        <div class="form-section">
+            <form id="appointmentForm">
+                <label for="disease">Select Disease:</label>
+                <select id="disease" name="disease">
+                    <option value="general_checkup">General Checkup</option>
+                    <option value="cardiology">Cardiology</option>
+                    <option value="dermatology">Dermatology</option>
+                    <option value="neurology">Neurology</option>
+                </select>
+                <br><br>
+                <label for="doctor">Select Doctor:</label>
+                <select id="doctor" name="doctor">
+                   
+                </select>
+                <br><br>
+                <label for="date">Select Date:</label>
+                <input type="date" id="date" name="date">
+                <br><br>
+                <label for="time">Select Time:</label>
+                <input type="time" id="time" name="time">
+                <br><br>
+                <button type="submit">Book Appointment</button>
+            </form>
+        </div>
+        <div class="dashboard-section">
+            <a href="patientview_appointments.html">View Booked Appointments</a>
+        </div>
+        <div class="dashboard-section">
+            <a href="logout.html">Logout</a>
+        </div>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Book Appointment</h2>
+        <div class="form-section">
+            <form id="appointmentForm">
+                <label for="disease">Select Disease:</label>
+                <select id="disease" name="disease" onchange="populateDoctors()">
+                    <option value="general_checkup">General Checkup</option>
+                    <option value="heart">heart</option>
+                    <option value="dermatology">Dermatology</option>
+                    <option value="neurology">Neurology</option>
+                </select>
+                <br><br>
+                <label for="doctor">Select Doctor:</label>
+                <select id="doctor" name="doctor" onchange="updateDoctorName()">
+                    <!-- Doctors will be populated dynamically using JavaScript -->
+                </select>
+                <br><br>
+                <label for="date">Select Date:</label>
+                <input type="date" id="date" name="date">
+                <br><br>
+                <label for="time">Select Time:</label>
+                <input type="time" id="time" name="time">
+                <br><br>
+                <button type="submit">Book Appointment</button>
+            </form>
+        </div>
+        <div class="dashboard-section">
+            <a href="patientview_appointment.html">View Booked Appointments</a>
+        </div>
+        <div class="dashboard-section">
+            <a href="logout.html">Logout</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        let doctorName = '';
+        // Function to populate the doctors dropdown based on selected disease
+        function populateDoctors() {
+            const selectDoctor = document.getElementById("doctor");
+            selectDoctor.innerHTML = ""; // Clear existing options
+
+            const selectedDisease = document.getElementById("disease").value;
+
+            // Fetch doctors data from the server
+            axios.get('http://localhost:3000/doctors')
+                .then(response => {
+                    const doctors = response.data;
+                    // Filter doctors based on selected disease
+                    const filteredDoctors = doctors.filter(doctor => doctor.specialty === selectedDisease);
+
+                    // Create and append options for filtered doctors
+                    filteredDoctors.forEach(doctor => {
+                        const option = document.createElement("option");
+                        option.value = doctor.id;
+                        option.text = doctor.username;
+                        selectDoctor.appendChild(option);
+                    });
+                    if (filteredDoctors.length > 0) {
+
+                        doctorName = filteredDoctors[0].username;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching doctors data:", error);
+                });
+        }
+
+        // Populate doctors on page load
+        populateDoctors();
+
+        function updateDoctorName() {
+            alert('hi');
+            const selectDoctor = document.getElementById("doctor");
+            const selectedOption = selectDoctor.options[selectDoctor.selectedIndex];
+            const doctorname = selectedOption.text;
+            localStorage.setItem("doctername", doctorname);
+
+        }
+
+        function bookAppointment() {
+            const patientId = 1; // Assuming a specific patient for now
+            const doctorId = document.getElementById("doctor").value;
+            const date = document.getElementById("date").value;
+            const time = document.getElementById("time").value;
+            const patientName = localStorage.getItem("patientName");
+            const newAppointment = {
+                "patientId": patientId,
+                "doctorId": doctorId,
+                "date": date,
+                "time": time,
+                "status": "confirmed",
+                "patientName": patientName,
+                "DocterName": doctorName
+            };
+
+            // Store the new appointment on the server
+            axios.post('http://localhost:3000/patientappointments', newAppointment)
+                .then(response => {
+                    console.log("Appointment booked successfully for patient ID:", patientId);
+                    alert("Appointment booked successfully!");
+                })
+                .catch(error => {
+                    console.error("Error saving appointment data:", error);
+                    alert("Error booking appointment. Please try again later.");
+                });
+
+            return false; // Prevent form submission
+        }
+
+
+        document.getElementById("appointmentForm").addEventListener("submit", bookAppointment);
+    </script>
+</body>
+
+</html>

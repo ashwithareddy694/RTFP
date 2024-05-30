@@ -1,0 +1,199 @@
+{
+  "user": {},
+  "patient": [
+    {
+      "id": 1,
+      "username": "john_doe",
+      "email": "john.doe@example.com",
+      "password": "securepassword",
+      "phone": "123-456-7890",
+      "address": "123 Main St, Springfield, USA"
+    },
+    {
+      "id": "f0a3",
+      "username": "ashwitha",
+      "email": "ashwithareddy0703@gmail.com",
+      "password": "123",
+      "phone": "999999999",
+      "address": "wresrgd"
+    },
+    {
+      "id": "6a48",
+      "username": "CVR22B81A05K5",
+      "email": "ashwithareddy@gmail.com",
+      "password": "123",
+      "phone": "999999999",
+      "address": "wresrgd"
+    },
+    {
+      "id": "5930",
+      "username": "K Vaishnavi",
+      "email": "kovuri@gamil.com",
+      "password": "123",
+      "phone": "9899090909",
+      "address": "Kanmanoor(village) ,Marikal(mandal),Narayanpet(District) ,Pincode-509351 H-No:1-39"
+    }
+  ],
+  "doctors": [
+    {
+      "id": 1,
+      "username": "drsmith",
+      "email": "drsmith@example.com",
+      "phone": "123-456-7890",
+      "specialty": "Cardiology",
+      "password": "password123"
+    },
+    {
+      "id": "c99d",
+      "username": "ashwitha",
+      "email": "ashwithareddy694@gmail.com",
+      "phone": "9440625857",
+      "specialty": "heart",
+      "password": "123"
+    },
+    {
+      "id": "0bdd",
+      "username": "prasanna_ram02",
+      "email": "pra@gmail.com",
+      "phone": "9440625857",
+      "specialty": "neurology",
+      "password": "123"
+    }
+  ],
+  "patientappointments": [
+    {
+      "doctorId": 1,
+      "date": "2024-06-01",
+      "time": "10:00 AM",
+      "status": "confirmed"
+    },
+    {
+      "id": "3c58",
+      "patientId": 1,
+      "doctorId": "c99d",
+      "date": "2024-05-01",
+      "time": "17:34",
+      "status": "confirmed"
+    },
+    {
+      "id": "373b",
+      "patientId": 1,
+      "doctorId": "",
+      "date": "",
+      "time": "",
+      "status": "confirmed"
+    },
+    {
+      "id": "2c13",
+      "patientId": 1,
+      "doctorId": "c99d",
+      "date": "2024-05-16",
+      "time": "16:46",
+      "status": "confirmed",
+      "patientName": "ashwitha"
+    },
+    {
+      "id": "eb73",
+      "patientId": 1,
+      "doctorId": "c99d",
+      "date": "2024-05-10",
+      "time": "13:53",
+      "status": "confirmed",
+      "patientName": null,
+      "DocterName": ""
+    },
+    {
+      "id": "8110",
+      "patientId": 1,
+      "doctorId": "c99d",
+      "date": "2024-05-16",
+      "time": "14:08",
+      "status": "confirmed",
+      "patientName": "ashwitha",
+      "DocterName": ""
+    },
+    {
+      "id": "60e9",
+      "patientId": 1,
+      "doctorId": "c99d",
+      "date": "2024-05-18",
+      "time": "16:10",
+      "status": "confirmed",
+      "patientName": "ashwitha",
+      "DocterName": ""
+    },
+    {
+      "id": "dfab",
+      "patientId": 1,
+      "doctorId": "c99d",
+      "date": "2024-05-10",
+      "time": "17:10",
+      "status": "confirmed",
+      "patientName": "ashwitha",
+      "DocterName": ""
+    },
+    {
+      "id": "cd70",
+      "patientId": 1,
+      "doctorId": "c99d",
+      "date": "2024-05-04",
+      "time": "14:17",
+      "status": "confirmed",
+      "patientName": "ashwitha",
+      "DocterName": "ashwitha"
+    },
+    {
+      "id": "1484",
+      "patientId": 1,
+      "doctorId": "c99d",
+      "date": "2024-05-08",
+      "time": "14:27",
+      "status": "confirmed",
+      "patientName": "ashwitha",
+      "DocterName": "ashwitha"
+    },
+    {
+      "id": "eef6",
+      "patientId": 1,
+      "doctorId": "c99d",
+      "date": "2024-05-08",
+      "time": "19:00",
+      "status": "confirmed",
+      "patientName": "K Vaishnavi",
+      "DocterName": "ashwitha"
+    },
+    {
+      "id": "931c",
+      "patientId": 1,
+      "doctorId": "0bdd",
+      "date": "2024-05-10",
+      "time": "17:11",
+      "status": "confirmed",
+      "patientName": "K Vaishnavi",
+      "DocterName": "prasanna_ram02"
+    }
+  ],
+  "admin": [
+    {
+      "id": 1,
+      "username": "admin1",
+      "password": "adminpassword",
+      "email": "admin1@example.com",
+      "phone_number": "1234567890"
+    },
+    {
+      "id": "f7af",
+      "username": "ashwithareddy",
+      "email": "ashwithareddy694@gmail.com",
+      "phone": "9618286736",
+      "password": "123"
+    },
+    {
+      "id": "4e43",
+      "username": "ashu",
+      "email": "ashu@gmail.com",
+      "phone": "1235678901",
+      "password": "123"
+    }
+  ]
+}

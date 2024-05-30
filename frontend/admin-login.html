@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Login</title>
+    <link rel="stylesheet" type="text/css" href="stylesadminlogin.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Admin Login</h2>
+        <form id="adminLoginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <a href="admin-signup.html">Signup</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Function to handle form submission
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent form submission
+
+            let username = document.querySelector("#username").value;
+            let password = document.querySelector("#password").value;
+
+            if (username === '' || password === '') {
+                alert("Please fill all the fields");
+                return;
+            }
+
+            axios.get('http://localhost:3000/admin')
+                .then(response => {
+                    const admins = response.data;
+                    console.log("Admins data fetched:", admins); // Debugging log
+                    const admin = admins.find(admin => admin.username === username && admin.password === password);
+                    if (admin) {
+                        alert("Login successful!");
+                        window.location.href = "admin-dashboard.html"; // Redirect to the dashboard
+                    } else {
+                        alert("Invalid username or password");
+                    }
+                })
+                .catch(error => {
+                    console.error("There was an error fetching the admin data!", error);
+                    alert("Error fetching admin data. Please try again later.");
+                });
+        }
+
+        // Attach the handleLogin function to the form's submit event
+        document.getElementById("adminLoginForm").addEventListener("submit", handleLogin);
+    </script>
+</body>
+
+</html>

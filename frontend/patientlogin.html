@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Login</title>
+    <link rel="stylesheet" href="stylespatientlogin.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Patient Login</h2>
+        <form id="patientloginform" onsubmit="return loginPatient()">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <a href="patientsignup.html">Don't have an account? Sign up</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function loginPatient(event) {
+            event.preventDefault();
+
+            let username = document.querySelector("#username").value;
+            let password = document.querySelector("#password").value;
+
+            axios.get('http://localhost:3000/patient')
+                .then(response => {
+                    const patients = response.data;
+                    const patient = patients.find(patient => patient.username === username && patient.password === password);
+                    localStorage.setItem('patientName', patient.username);
+
+                    if (patient) {
+                        alert("Login successful");
+                        window.location.href = "patientdashboard.html";
+                    } else {
+                        alert("Invalid username or password");
+                    }
+                })
+                .catch(error => {
+                    console.error("There was an error fetching the patient data!", error);
+                });
+        }
+        document.getElementById("patientloginform").addEventListener("submit", loginPatient);
+    </script>
+</body>
+
+</html>

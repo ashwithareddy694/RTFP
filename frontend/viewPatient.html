@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Patients</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #patientlist {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Patients</h1>
+        <div id="patientlist"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        axios.get('http://localhost:3000/patient')
+            .then(response => {
+                const patients = response.data;
+                const patientList = document.getElementById('patientlist');
+
+                patients.forEach(patient => {
+                    const patientName = document.createElement('p');
+                    patientName.textContent = patient.username; // Display the patient's username
+                    patientList.appendChild(patientName);
+                });
+            })
+            .catch(error => {
+                console.error("There was an error fetching the patients data!", error);
+            });
+    </script>
+</body>
+
+</html>
