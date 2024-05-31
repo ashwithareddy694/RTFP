@@ -1,27 +1,39 @@
-body {
+/* Resetting default margin and padding */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global styles */
+body {
     font-family: Arial, sans-serif;
-    background: url('background.jpg') no-repeat center center fixed;
+    background-image: url('backgroundviewapp.jpg');
+    /* Replace with your background image file */
     background-size: cover;
-    height: 100vh;
+    background-position: center;
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    max-width: 1000px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 80%;
-    max-width: 800px;
 }
 
 h2 {
     margin-bottom: 20px;
+    font-size: 24px;
+    color: #007bff;
 }
 
 .dashboard-section {
@@ -47,22 +59,23 @@ td {
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #007bff;
+    color: white;
 }
 
 .logout-section {
-    text-align: right;
+    margin-top: 20px;
 }
 
 .logout-section a {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
     text-decoration: none;
+    color: #fff;
+    background-color: #ff4b5c;
+    padding: 10px 20px;
     border-radius: 5px;
-    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .logout-section a:hover {
-    background-color: #45a049;
+    background-color: #d63345;
 }
